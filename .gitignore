@@ -1,0 +1,52 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Environment variables
+.env
+.env.*
+
+# SQLite database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Mac OS
+.DS_Store
+
+# Byte-compiled / C extensions
+*.so
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+pytest_cache/
+.tox/
+.pytest_cache/
+
+# Alembic / Migrations (optional)
+alembic/versions/
