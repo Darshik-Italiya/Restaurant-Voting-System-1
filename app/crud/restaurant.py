@@ -1,8 +1,9 @@
 from sqlalchemy.orm import Session
+from typing import Optional
 from app.models.restaurant import Restaurant
 
 
-def create_restaurant(db: Session, name: str, description: str, creator_id: int):
+def create_restaurant(db: Session, name: str, description: Optional[str], creator_id: int):
     restaurant = Restaurant(name=name, description=description, creator_id=creator_id)
     db.add(restaurant)
     db.commit()

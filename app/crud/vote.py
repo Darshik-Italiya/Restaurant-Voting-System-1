@@ -4,9 +4,10 @@ from app.models.vote import Vote
 
 
 def get_votes_today(db: Session, user_id: int):
+    today = date.today()
     return (
         db.query(Vote)
-        .filter(Vote.user_id == user_id, Vote.vote_date == date.today())
+        .filter(Vote.user_id == user_id, Vote.vote_date == today)
         .all()
     )
 
