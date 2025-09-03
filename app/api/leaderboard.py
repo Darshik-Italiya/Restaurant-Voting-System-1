@@ -10,10 +10,6 @@ router = APIRouter()
 
 
 def calculate_leaderboard(db: Session, start_date: date, end_date: date):
-    """
-    Calculate leaderboard based on number of unique voters per restaurant.
-    """
-
     # Count distinct users (unique voters) for each restaurant
     results = (
         db.query(

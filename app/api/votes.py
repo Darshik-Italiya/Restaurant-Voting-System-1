@@ -9,7 +9,7 @@ from app.crud.vote import get_votes_today, create_vote
 router = APIRouter()
 
 MAX_DAILY_VOTES = 3
-POINTS_DECAY = [1, 0.5, 0.25]  # first, second, third vote on same restaurant
+POINTS_DECAY = [1, 0.5, 0.25]
 
 
 @router.post("/", response_model=dict)
@@ -25,7 +25,7 @@ def vote(
         [v for v in votes_today if getattr(v, "restaurant_id") == data.restaurant_id]
     )
     if same_restaurant_votes >= len(POINTS_DECAY):
-        points = POINTS_DECAY[-1]  # 0.25 for 4th+ vote
+        points = POINTS_DECAY[-1]
     else:
         points = POINTS_DECAY[same_restaurant_votes]
 
