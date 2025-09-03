@@ -11,7 +11,7 @@ class Restaurant(Base):
     name = Column(String, unique=True, index=True)
     description = Column(String, nullable=True)
     creator_id = Column(Integer, ForeignKey("users.id"))
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now)
 
     creator = relationship("User", back_populates="restaurants")
     votes = relationship("Vote", back_populates="restaurant")

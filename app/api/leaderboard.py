@@ -10,20 +10,29 @@ router = APIRouter()
 
 
 def calculate_leaderboard(db: Session, start_date: date, end_date: date):
-    # total points per restaurant
+    """
+    Calculate leaderboard based on number of unique voters per restaurant.
+    """
+
+    # Count distinct users (unique voters) for each restaurant
     results = (
-        db.query(Vote.restaurant_id, func.sum(Vote.points).label("total_points"))
+        db.query(
+            Vote.restaurant_id,
+            func.count(func.distinct(Vote.user_id)).label("unique_voters"),
+        )
         .filter(Vote.vote_date >= start_date, Vote.vote_date <= end_date)
         .group_by(Vote.restaurant_id)
-        .order_by(func.sum(Vote.points).desc())
+        .order_by(func.count(func.distinct(Vote.user_id)).desc())
         .all()
     )
 
     leaderboard = []
-    for r_id, points in results:
+    for r_id, unique_voters in results:
         restaurant = db.query(Restaurant).filter(Restaurant.id == r_id).first()
         if restaurant:
-            leaderboard.append({"restaurant": restaurant.name, "points": points})
+            leaderboard.append(
+                {"restaurant": restaurant.name, "unique_voters": unique_voters}
+            )
     return leaderboard
 
 
